@@ -1,26 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+class App extends Component {
+  constructor(props) {
+      super(props);
+      this.state = {
+        count: 0
+      };
+
+      // Binds handleClick method to class App.
+      // More context: bind creates a new function that will have this set to
+      // the first parameter passed to bind.
+      this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.setState({count: this.state.count + 1});
+  }
+
+  render() {
+    return (
+      <div data-test="component-app">
+        <h1 data-test="counter-display">
+          The counter is {this.state.count}
+        </h1>
+        <button
+          data-test="increment-button"
+          onClick={this.handleClick}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+          Increment counter
+        </button>
+      </div>
+    );
+  }
 }
 
 export default App;
